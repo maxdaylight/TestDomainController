@@ -1,0 +1,222 @@
+PS C:\Users\maxdaylight> create-testDomainController.ps1 -verbose
+Transcript started, output file is C:\Users\maxdaylight\Documents\GitHub\Create-TestDomainController\Logs\Create-TestDomainController_20250304_101542.log
+VERBOSE: Populating RepositorySourceLocation property for module Az.
+VERBOSE: Populating RepositorySourceLocation property for module Az.
+Connected to Azure subscription: Sandbox Account_Internal
+Starting Domain Controller deployment process...
+Using existing resource group: MD-TEST-RG2
+Initiating VM deployment...
+Configuring PowerShell remoting...
+WARNING: PowerShell remoting has been enabled only for PowerShell 6+ configurations and does not affect Windows PowerShell remoting configurations. Run this cmdlet in Windows PowerShell to affect all PowerShell remoting configurations.
+PowerShell remoting configured successfully
+Creating Virtual Network...
+Virtual Network created successfully
+Creating Public IP...
+Public IP created successfully
+Creating Network Security Group...
+Network Security Group created successfully
+Creating Network Interface...
+Creating VM Configuration with Trusted Launch...
+Setting up boot diagnostics storage...
+Attempt 1 of 5 to configure storage...
+Checking for existing storage account...
+Creating new storage account 'MDteststorage0'...
+Storage account created successfully
+Storage account provisioning confirmed
+VM creation attempt 1 of 3 with security type: TrustedLaunch
+Attempting to create VM with Trusted Launch security...
+Configuring boot diagnostics...
+Creating Virtual Machine: MD-TEST-DC01 (Attempt 1)...
+Virtual Machine created successfully with security type: TrustedLaunch
+Configuring boot diagnostics...
+Creating Virtual Machine: MD-TEST-DC01...
+Virtual Machine created successfully
+Configuring automatic shutdown schedule...
+Auto-shutdown details:
+  Schedule Name: shutdown-computevm-MD-TEST-DC01
+  VM ID: /subscriptions/2d9a0b3b-de9d-4acf-baad-af240553bcc7/resourceGroups/MD-TEST-RG2/providers/Microsoft.Compute/virtualMachines/MD-TEST-DC01
+  Shutdown Time: 2100
+  Time Zone: Mountain Standard Time
+Auto-shutdown schedule created using ResourceId parameter set
+Automatic shutdown scheduled successfully for 2100 Mountain Standard Time
+Waiting for VM to be fully ready...
+VM is ready and running
+Configuring WinRM on remote VM...
+VERBOSE: Transfer Summary
+--------------------------------
+Total:  1.
+Successful: 1.
+Failed: 0.
+Configuring PowerShell Remoting...
+Configuring PowerShell remoting...
+WARNING: PowerShell remoting has been enabled only for PowerShell 6+ configurations and does not affect Windows PowerShell remoting configurations. Run this cmdlet in Windows PowerShell to affect all PowerShell remoting configurations.
+PowerShell remoting configured successfully
+Successfully created VM deployment object
+Received array result from VM deployment, contains 3 elements
+Examining array element [0]:
+  Type: Microsoft.WindowsAzure.Commands.Common.Storage.ResourceModel.AzureStorageBlob
+  Properties: ICloudBlob, BlobType, Length, IsDeleted, BlobClient, BlobBaseClient, BlobProperties, RemainingDaysBeforePermanentDelete, ContentType, LastModified, SnapshotTime, ContinuationToken, VersionId, IsLatestVersion, AccessTier, TagCount, Tags, ListBlobProperties, Context, Name
+Examining array element [1]:
+  Type: System.Boolean
+Examining array element [2]:
+  Type: System.Management.Automation.PSCustomObject
+  Properties: VM, PublicIP, ResourceGroupName, Credentials
+  - VM: present
+  - PublicIP: present
+  - ResourceGroupName: present
+  - Credentials: present
+Found candidate object with required properties in array
+VM Deployment object type: System.Management.Automation.PSCustomObject
+Available properties: VM, PublicIP, ResourceGroupName, Credentials
+VM deployment object validation successful
+Verifying VM accessibility...
+Starting Domain Controller configuration...
+Creating PowerShell session (Attempt 1 of 5)...
+Successfully created and validated PowerShell session
+Configuring static IP and DNS settings...
+Found active adapter: Ethernet
+Found active adapter: Ethernet
+WARNING: The network connection to 20.3.172.102 has been interrupted. Attempting to reconnect for up to 4 minutes...
+WARNING: Attempting to reconnect to 20.3.172.102 ...
+WARNING: The network connection to 20.3.172.102 has been restored.
+Current IP configuration: 10.0.0.4
+Current IP configuration: 10.0.0.4
+Current gateway: 10.0.0.1
+Current gateway: 10.0.0.1
+Successfully configured static IP: 10.0.0.4 10.0.0.4
+Successfully configured static IP: 10.0.0.4 10.0.0.4
+Configuring IPv6 settings...
+Configuring IPv6 settings...
+IP configuration verified: 10.0.0.4
+IP configuration verified: 10.0.0.4
+Configuring Domain Controller...
+Installing AD DS Windows Feature...
+Installing AD DS Windows Feature...
+AD DS Windows Feature installed successfully
+AD DS Windows Feature installed successfully
+Configuring cryptography settings...
+Configuring cryptography settings...
+Installing AD DS role...
+Installing AD DS role...
+WARNING: Windows Server 2022 domain controllers have a default for the security setting named "Allow cryptography algorithms compatible with Windows NT 4.0" that prevents weaker cryptography algorithms when establishing security channel sessions.
+
+For more information about this setting, see Knowledge Base article 942564 (http://go.microsoft.com/fwlink/?LinkId=104751).
+
+
+WARNING: A delegation for this DNS server cannot be created because the authoritative parent zone cannot be found or it does not run Windows DNS server. If you are integrating with an existing DNS infrastructure, you should manually create a delegation to this DNS server in the parent zone to ensure reliable name resolution from outside the domain "MDtest.local". Otherwise, no action is required.
+
+
+WARNING: Windows Server 2022 domain controllers have a default for the security setting named "Allow cryptography algorithms compatible with Windows NT 4.0" that prevents weaker cryptography algorithms when establishing security channel sessions.
+
+For more information about this setting, see Knowledge Base article 942564 (http://go.microsoft.com/fwlink/?LinkId=104751).
+
+
+WARNING: A delegation for this DNS server cannot be created because the authoritative parent zone cannot be found or it does not run Windows DNS server. If you are integrating with an existing DNS infrastructure, you should manually create a delegation to this DNS server in the parent zone to ensure reliable name resolution from outside the domain "MDtest.local". Otherwise, no action is required.
+
+
+
+PSComputerName : 20.3.172.102
+RunspaceId     : ec4432a2-2edb-4575-9963-1e2cb528c056
+Message        : Operation completed successfully
+Context        : DCPromo.General.1
+RebootRequired : False
+Status         : Success
+
+Domain Controller configuration completed successfully
+Waiting for domain services to be available...
+Creating test users...
+Creating PowerShell session (Attempt 1 of 5)...
+Successfully created and validated PowerShell session
+PSComputerName                     : 20.3.172.102
+RunspaceId                         : c6df23e2-0cad-42ae-871a-c46351f8a32e
+AllowedDNSSuffixes                 : {}
+ChildDomains                       : {}
+ComputersContainer                 : CN=Computers,DC=MDtest,DC=local
+DeletedObjectsContainer            : CN=Deleted Objects,DC=MDtest,DC=local
+DistinguishedName                  : DC=MDtest,DC=local
+DNSRoot                            : MDtest.local
+DomainControllersContainer         : OU=Domain Controllers,DC=MDtest,DC=local
+DomainMode                         : Windows2016Domain
+DomainSID                          : S-1-5-21-2323211768-2389712503-87798955
+ForeignSecurityPrincipalsContainer : CN=ForeignSecurityPrincipals,DC=MDtest,DC=local
+Forest                             : MDtest.local
+InfrastructureMaster               : MD-TEST-DC01.MDtest.local
+LastLogonReplicationInterval       :
+LinkedGroupPolicyObjects           : {CN={31B2F340-016D-11D2-945F-00C04FB984F9},CN=Policies,CN=System,DC=MDtest,DC=loca
+                                     l}
+LostAndFoundContainer              : CN=LostAndFound,DC=MDtest,DC=local
+ManagedBy                          :
+Name                               : MDtest
+NetBIOSName                        : MDTEST
+ObjectClass                        : domainDNS
+ObjectGUID                         : 8756fb08-ac18-4297-9865-45d046c35812
+ParentDomain                       :
+PDCEmulator                        : MD-TEST-DC01.MDtest.local
+PublicKeyRequiredPasswordRolling   : True
+QuotasContainer                    : CN=NTDS Quotas,DC=MDtest,DC=local
+ReadOnlyReplicaDirectoryServers    : {}
+ReplicaDirectoryServers            : {MD-TEST-DC01.MDtest.local}
+RIDMaster                          : MD-TEST-DC01.MDtest.local
+SubordinateReferences              : {DC=ForestDnsZones,DC=MDtest,DC=local, DC=DomainDnsZones,DC=MDtest,DC=local,
+                                     CN=Configuration,DC=MDtest,DC=local}
+SystemsContainer                   : CN=System,DC=MDtest,DC=local
+UsersContainer                     : CN=Users,DC=MDtest,DC=local
+
+Created user: TestUser1
+Created user: TestUser1
+Created user: TestUser2
+Created user: TestUser2
+Created user: TestUser3
+Created user: TestUser3
+Created user: TestUser4
+Created user: TestUser4
+Created user: TestUser5
+Created user: TestUser5
+Created user: TestUser6
+Created user: TestUser6
+Created user: TestUser7
+Created user: TestUser7
+Created user: TestUser8
+Created user: TestUser8
+Created user: TestUser9
+Created user: TestUser9
+Created user: TestUser10
+Created user: TestUser10
+Performing final validation...
+Domain Controller deployment completed successfully
+Retrieving connection information...
+
+RDP Connection Information:
+------------------------
+Computer:  20.3.172.102
+Username:  MDadmin
+Password:  Password can be found in .env file
+Domain:    MDtest.local
+
+To connect:
+1. Open Remote Desktop Connection (mstsc.exe)
+2. Enter the IP address: 20.3.172.102
+3. Use the credentials above
+Note: Domain join may take 5-10 minutes after script completion
+
+=== Auto-Shutdown Schedule Verification ===
+
+Verifying auto-shutdown configuration...
+Auto-shutdown found with alternative name: 'shutdown-computevm-MD-TEST-DC01'
+Details: {
+  "status": "Enabled",
+  "taskType": "ComputeVmShutdownTask",
+  "dailyRecurrence": {
+    "time": "2100"
+  },
+  "timeZoneId": "Mountain Standard Time",
+  "notificationSettings": {
+    "status": "Disabled",
+    "timeInMinutes": 30
+  },
+  "createdDate": "2025-03-04T17:27:10.773205Z",
+  "targetResourceId": "/subscriptions/2d9a0b3b-de9d-4acf-baad-af240553bcc7/resourceGroups/MD-TEST-RG2/providers/Microsoft.Compute/virtualMachines/MD-TEST-DC01",
+  "provisioningState": "Succeeded",
+  "uniqueIdentifier": "a6a729b3-7a87-4e1e-b777-ec10a1f0402b"
+}
+Transcript stopped, output file is C:\Users\maxdaylight\Documents\GitHub\Create-TestDomainController\Logs\Create-TestDomainController_20250304_101542.log

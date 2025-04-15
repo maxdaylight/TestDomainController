@@ -1,0 +1,22 @@
+# Ignore everything in Logs directory
+Logs/*
+# Keep the empty directory with .gitkeep
+!Logs/.gitkeep
+
+# Ignore Windows system files
+Thumbs.db
+
+# Ignore everything in CommitHistory directory
+CommitHistory/
+
+# Log files
+*.log
+
+# Marker files
+*.marker
+
+# .env files
+*.env
+
+# CSV files
+*.csv
